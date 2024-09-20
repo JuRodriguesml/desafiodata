@@ -1,0 +1,19 @@
+import pandas as pd
+
+df = pd.read_excel('vendas.xlsx')
+print(df)
+
+soma_por_loja = df.groupby("ID Loja")["Valor Final"].sum()
+print ("Soma por loja:")
+print(soma_por_loja)
+
+item_por_loja = df.groupby("ID Loja")["Quantidade"].sum()
+print ("Item por loja:")
+print(item_por_loja)
+
+Ticket_medio = soma_por_loja/item_por_loja
+print(Ticket_medio)
+
+Relatorio = pd.concat([soma_por_loja, item_por_loja, Ticket_medio], axis=1)
+Relatorio.columns = ["soma_por_loja", "item_por_loja", "Ticket_medio"]
+print(Relatorio)
